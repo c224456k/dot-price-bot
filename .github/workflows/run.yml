@@ -22,4 +22,4 @@ jobs:
       - name: Run script
         env:
           WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK }}
-        run: python main.py
+        run: python DCbot.py
