@@ -2,7 +2,7 @@ import requests
 
 def get_dot_data():
     # 使用 CoinGecko API 取得現在價格與 24h 漲跌
-    crypto_url = "https://api.coingecko.com/api/v3/simple/price?ids=polkadot&vs_currencies=usd&include_24hr_change=true"
+    crypto_url = "https://discord.com/api/webhooks/1331621312405176372/t-u1AXN1WtUYGCqP9XjaiB_aHsL1AyTxTdz9OKGRPDxM48WYRcd9B0S7Dz3aaMGx5VLy"
     
     try:
         response = requests.get(crypto_url)
@@ -48,4 +48,5 @@ MY_WEBHOOK_URL = "https://discord.com/api/webhooks/1451566651765162036/z7-pOpZ0D
 cur, yes, chg = get_dot_data()
 if cur is not None:
     send_to_discord(MY_WEBHOOK_URL, cur, yes, chg)
+
     print(f"成功發送！現在: ${cur:.2f}, 一天前: ${yes:.2f}")
