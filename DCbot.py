@@ -42,7 +42,7 @@ def send_to_discord(webhook_url, current, yesterday, change):
     requests.post(webhook_url, json=payload)
 
 # --- 設定區 ---
-MY_WEBHOOK_URL = "https://discord.com/api/webhooks/1331621312405176372/t-u1AXN1WtUYGCqP9XjaiB_aHsL1AyTxTdz9OKGRPDxM48WYRcd9B0S7Dz3aaMGx5VLy"
+MY_WEBHOOK_URL = "https://discord.com/api/webhooks/1451566651765162036/z7-pOpZ0DKtodgdV8n9pGEFX-NVIohsqlSt4EQAL2LebGsOY9-7eO_Fvgy2zawcTXjc1"
 
 # 執行
 cur, yes, chg = get_dot_data()
@@ -50,4 +50,5 @@ if cur is not None:
     send_to_discord(MY_WEBHOOK_URL, cur, yes, chg)
 
     print(f"成功發送！現在: ${cur:.2f}, 一天前: ${yes:.2f}")
+
 
