@@ -70,7 +70,7 @@ def get_wantgoo_fg():
         raise ValueError("No data available")
 
 def send_discord_all():
-    webhook_url = "https://discord.com/api/webhooks/1331621312405176372/t-u1AXN1WtUYGCqP9XjaiB_aHsL1AyTxTdz9OKGRPDxM48WYRcd9B0S7Dz3aaMGx5VLy"
+    webhook_url = "https://discord.com/api/webhooks/1451566651765162036/z7-pOpZ0DKtodgdV8n9pGEFX-NVIohsqlSt4EQAL2LebGsOY9-7eO_Fvgy2zawcTXjc1"
     my_id = "302727629226639360"
 
     try:
@@ -138,4 +138,5 @@ if __name__ == "__main__":
             send_discord_all()
     except Exception as e:
         print(f"檢查上班日失敗: {e}，預設執行")
+
         send_discord_all()
