@@ -1,2 +1,4 @@
 requests
 yfinance
+discord.py
+google-generativeai
