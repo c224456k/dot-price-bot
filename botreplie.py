@@ -1,6 +1,8 @@
 import discord
 import google.generativeai as genai
 import os
+from datetime import datetime, timedelta, timezone
+from keep_alive import keep_alive # <--- 【新增 1】匯入這行
 
 # 雲端版：從環境變數讀取 Key
 GENAI_API_KEY = os.getenv("GENAI_API_KEY") 
@@ -41,4 +43,5 @@ async def on_message(message):
                 await message.channel.send("AI 思考時發生了一點錯誤，請稍後再試。")
 
 if DISCORD_TOKEN:
+    keep_alive() # <--- 【新增 2】在啟動機器人之前，先啟動小網站
     client.run(DISCORD_TOKEN)
