@@ -5,8 +5,8 @@ import os # 引入作業系統模組
 # --- 改成從環境變數讀取 ---
 # 本地端測試時，如果不設環境變數會讀不到，建議先保留字串測試，
 # 但上傳前請務必改成 os.getenv
-GENAI_API_KEY = os.getenv("AIzaSyCE6VxEe9ubTbvk5BKMOezY4hPccPy24Eg") 
-DISCORD_TOKEN = os.getenv("MTQ2MjA4NDg4MDIyODgxMDgyMw.GpkJPc.fJ6RrwO7Pxcl-WaXu5rbPgMWnqQYnCCp9Iy_bg")
+GENAI_API_KEY = os.getenv("GENAI_API_KEY") 
+DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
 
 genai.configure(api_key=GENAI_API_KEY)
 model = genai.GenerativeModel('gemini-2.5-flash')
