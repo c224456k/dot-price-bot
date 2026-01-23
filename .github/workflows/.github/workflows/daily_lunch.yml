@@ -1,0 +1,29 @@
+name: Daily Lunch Reminder
+
+on:
+  schedule:
+    # 設定每天 UTC 03:00 執行 (即台灣時間 11:00)
+    - cron: '0 3 * * *'
+  
+  # 允許您在 Actions 頁面手動按按鈕測試
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 下載程式碼 (Checkout)
+        uses: actions/checkout@v3
+
+      - name: 設定 Python 環境
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: 安裝套件
+        run: pip install requests
+
+      - name: 執行午餐腳本
+        # 如果您程式碼裡已經寫死 Webhook 網址，這邊直接執行就好
+        # 如果是用環境變數，記得去 Settings > Secrets 設定並在這裡用 env 讀取
+        run: python lunch.py
