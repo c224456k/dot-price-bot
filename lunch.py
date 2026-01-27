@@ -67,7 +67,7 @@ def send_notification():
 
     # 3. 發送訊息
     data = {
-        "content": f"<@{USER_ID}> 今天午餐吃什麼?"
+        "content": f"<@{USER_ID}> 那個...襄理 請問午餐吃甚麼?"
     }
     
     try:
@@ -79,3 +79,4 @@ def send_notification():
 
 if __name__ == "__main__":
     send_notification()
+
