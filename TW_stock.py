@@ -47,27 +47,38 @@ def get_wantgoo_real_time(symbol):
     raise ValueError(f"無法獲取 {symbol} 的數據")
 
 def get_wantgoo_fg():
-    """從 CNN 的 Fear and Greed Index API 抓取數據 (via alternative.me)"""
-    url = "https://api.alternative.me/fng/?limit=1"
-    res = requests.get(url, timeout=10)
+    """從 CNN Fear & Greed Index 抓取美股市場情緒"""
+    url = "https://production.dataviz.cnn.io/index/fearandgreed/graphdata"
+    headers = {
+        "User-Agent": (
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) "
+            "Chrome/131.0.0.0 Safari/537.36"
+        ),
+        "Referer": "https://edition.cnn.com/",
+        "Accept": "application/json",
+    }
+
+    res = requests.get(url, headers=headers, timeout=10)
     res.raise_for_status()
     data = res.json()
-    if data['data']:
-        item = data['data'][0]
-        value = int(item['value'])
-        classification_en = item['value_classification']
-        # 映射到中文
-        classifications = {
-            "Extreme Fear": "極度恐懼",
-            "Fear": "恐懼",
-            "Neutral": "中立",
-            "Greed": "貪婪",
-            "Extreme Greed": "極度貪婪"
-        }
-        classification = classifications.get(classification_en, classification_en)
-        return value, classification
-    else:
-        raise ValueError("No data available")
+
+    fear_and_greed = data.get("fear_and_greed")
+    if not fear_and_greed:
+        raise ValueError("CNN Fear & Greed 無數據")
+
+    value = round(float(fear_and_greed["score"]))
+    classification_en = fear_and_greed["rating"]
+
+    classifications = {
+        "extreme fear": "極度恐懼",
+        "fear": "恐懼",
+        "neutral": "中立",
+        "greed": "貪婪",
+        "extreme greed": "極度貪婪",
+    }
+    classification = classifications.get(classification_en.lower(), classification_en)
+    return value, classification
 
 def send_discord_all():
     webhook_url = "https://discord.com/api/webhooks/1451566651765162036/z7-pOpZ0DKtodgdV8n9pGEFX-NVIohsqlSt4EQAL2LebGsOY9-7eO_Fvgy2zawcTXjc1"
@@ -81,7 +92,7 @@ def send_discord_all():
         print(f"富邦正2: {st_p:.2f} ({st_c_amount:+.2f})")  # 調試
         # 3. 抓取情緒
         fg_v, fg_t = get_wantgoo_fg()
-        print(f"抓取到的恐懼與貪婪: {fg_v} ({fg_t})")  # 調試印出
+        print(f"抓取到的 CNN Fear & Greed: {fg_v} ({fg_t})")  # 調試印出
 
         payload = {
             "content": f"<@{my_id}> 📈 實時行情報告",
