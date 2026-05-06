@@ -67,7 +67,7 @@ def send_notification():
 
     # 3. 發送訊息
     data = {
-        "content": f"<@{USER_ID}> 那個...襄理  理專回復了嗎??"
+        "content": f"<@{USER_ID}> 那個...襄理  理專回覆了嗎??"
     }
     
     try:
